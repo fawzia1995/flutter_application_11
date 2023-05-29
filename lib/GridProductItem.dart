@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_11/productdetail_screen%20.dart';
-import 'package:flutter_application_11/provider/product.dart';
+import 'package:flutter_application_11/provider/cart_provider/cart_provider.dart';
+import 'package:flutter_application_11/provider/product_provider/product.dart';
 import 'package:provider/provider.dart';
 
 class GridProductItem extends StatelessWidget {
@@ -10,7 +11,8 @@ class GridProductItem extends StatelessWidget {
 //final String id,title,image;
   @override
   Widget build(BuildContext context) {
-    //final product=Provider.of<Product>(context);
+    final product=Provider.of<Product>(context,listen: false);
+    final cart =Provider.of<Cart>(context);
     return Consumer <Product>(
       builder: (_,product,child){
       return ClipRRect(
@@ -29,7 +31,8 @@ class GridProductItem extends StatelessWidget {
           product.toggleIsFav();
          }),
         trailing: IconButton(icon: Icon(Icons.shopping_cart),
-        onPressed: (){ })
+
+        onPressed: (){cart.addItem(productId:product.id,title: product.title,price:product.price); })
         
         
       ),),

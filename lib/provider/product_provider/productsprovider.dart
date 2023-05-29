@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'product.dart';
+
 
 //import '../product.dart';
-import 'package:flutter_application_11/provider/product.dart';
 
 class Products with ChangeNotifier{
  List<Product> _availProducts = [
@@ -36,6 +37,12 @@ class Products with ChangeNotifier{
         image: 'assets/images/oneplus.jpeg',
         price: 1000),
   ];
+ 
+  List<Product>get favoriteProducts{
+     return _availProducts.where((product)=> product.isFavorite).toList();
+   }
   List<Product>get availProducts=>_availProducts;
-
+Product findById(String id){
+  return _availProducts.firstWhere((Product) => Product.id==id);
+}
 }

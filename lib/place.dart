@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Baby extends StatelessWidget {
-Baby({super.key});
+class Placee extends StatelessWidget {
+  const Placee({super.key});
 
   @override
   Widget build(BuildContext context) {

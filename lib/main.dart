@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_11/CartScreen.dart';
+import 'package:flutter_application_11/order_screen.dart';
 import 'package:flutter_application_11/productdetail_screen%20.dart';
-import 'package:flutter_application_11/provider/productsprovider.dart';
+import 'package:flutter_application_11/provider/order_provider/orders.dart';
+import 'package:flutter_application_11/provider/product_provider/productsprovider.dart';
 import 'package:provider/provider.dart';
 import 'MainShoopingScreen.dart';
+import 'provider/cart_provider/cart_provider.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +19,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    
+    return  MultiProvider(
+      providers: [
+       ChangeNotifierProvider(
+        create:(BuildContext context) =>Products()) ,
+        ChangeNotifierProvider(create: (BuildContext context)=>Cart(),),
+        ChangeNotifierProvider(create:(BuildContext context)=>Orders())],child:
+        MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -27,8 +39,10 @@ class MyApp extends StatelessWidget {
         
         MainShoppingScreen.id: (c)=>MainShoppingScreen(),
         ProductDetailsScreen.id:(c)=>ProductDetailsScreen(),
+      CartScreen.id :(c)=>CartScreen(),
+      OrdersScreen.id:(c)=>OrdersScreen()
       },
-    );
+    ));
   }
 }
 class MyHomePage extends StatelessWidget {
@@ -36,8 +50,8 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  ChangeNotifierProvider(
-      create:(BuildContext context) =>Products() ,
-      child: MainShoppingScreen()); }
+    
+      return MainShoppingScreen();
+     }
 }
 
